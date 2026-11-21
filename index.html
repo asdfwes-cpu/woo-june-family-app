@@ -92,14 +92,31 @@ body,.muted,.sub,.category-btn small,.lesson p,.room-item div{font-family:"Nanum
 .room-focus-art .room-prop{font-size:clamp(34px,9vw,58px);filter:drop-shadow(0 4px 2px #6e574455);background:#ffffff8c;border-radius:16px;padding:5px 8px;min-width:54px;text-align:center}
 .village-eggs{display:flex;justify-content:center;gap:9px;margin:8px auto 2px}.village-egg{width:39px;height:49px;border-radius:50% 50% 45% 45%;display:grid;place-items:center;border:2px solid #ffffffd9;box-shadow:0 3px 7px #52634a33;font-size:23px}
 
-@media (max-width:600px){.tiles{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important}.tile{min-height:108px!important;padding:9px 5px!important}.tile .ico{font-size:25px!important}.tile strong{font-size:12px!important}.tile small{font-size:10px!important;line-height:1.25}}@media(max-width:600px){.grid[style*="grid-template-columns:repeat(3"] .tile{min-height:104px;padding:8px 4px}.grid[style*="grid-template-columns:repeat(3"] .tile .ico{font-size:24px}.grid[style*="grid-template-columns:repeat(3"] .tile strong{font-size:12px}.grid[style*="grid-template-columns:repeat(3"] .tile small{font-size:10px;line-height:1.2}} </style>
+@media (max-width:600px){.tiles{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important}.tile{min-height:108px!important;padding:9px 5px!important}.tile .ico{font-size:25px!important}.tile strong{font-size:12px!important}.tile small{font-size:10px!important;line-height:1.25}}@media(max-width:600px){.grid[style*="grid-template-columns:repeat(3"] .tile{min-height:104px;padding:8px 4px}.grid[style*="grid-template-columns:repeat(3"] .tile .ico{font-size:24px}.grid[style*="grid-template-columns:repeat(3"] .tile strong{font-size:12px}.grid[style*="grid-template-columns:repeat(3"] .tile small{font-size:10px;line-height:1.2}} 
+.daily-routine{background:linear-gradient(135deg,#fff8df,#fffafd 55%,#f4eaff);border:1px solid #f0e4c8;border-radius:18px;padding:13px;margin:10px 0}
+.daily-routine-title{display:flex;align-items:center;justify-content:space-between;gap:8px;font-weight:700;font-size:16px}
+.daily-routine-list{display:grid;gap:7px;margin-top:10px}
+.daily-routine-row{display:flex;align-items:center;gap:10px;background:#ffffffc9;border:1px solid #f0e9f1;border-radius:13px;padding:9px 11px;font-size:14px}
+.daily-routine-row input{width:20px;height:20px;accent-color:#9c83c9}
+.daily-routine-row.done span{text-decoration:line-through;color:#9a91a5}
+.routine-progress{font-size:12px;color:#8b7b9b;white-space:nowrap}
+.sticker-wall{margin-top:14px;border-radius:20px;padding:14px;background-color:#f8edc9;background-image:radial-gradient(#e6d8a9 1px,transparent 1px);background-size:13px 13px;border:1px solid #eadcae}
+.sticker-wall-title{font-weight:700;margin-bottom:10px}
+.sticker-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.sticker-item{min-height:76px;border-radius:16px;background:#fffdf4e8;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 2px 5px #77653b18;transform:rotate(-2deg)}
+.sticker-item:nth-child(even){transform:rotate(2deg)}
+.sticker-emoji{font-size:31px;line-height:1.2}
+.sticker-date{font-size:10px;color:#8b8068;margin-top:4px}
+.sticker-empty{font-size:12px;color:#8b8068;padding:14px 4px;text-align:center}
+@media(max-width:380px){.sticker-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+</style>
 </head>
 <body>
 <header><div class="wrap"><div class="top" style="align-items:stretch;gap:10px"><div style="min-width:0;flex:1;display:flex;flex-direction:column;justify-content:flex-start"><div class="brand" style="white-space:nowrap;display:block;flex-shrink:0">🌷 우준가족AI비서 🌷</div><div class="sub" id="familyTagline" role="button" tabindex="0" title="눌러서 오늘의 한마디 수정">〈오늘의 한마디〉</div></div><div style="min-width:0;flex:1;display:flex;flex-direction:column;align-items:flex-end;justify-content:flex-start;text-align:right"><div class="date" id="today"></div><div id="familyDayCounts" style="font-size:11px;color:#766b83;line-height:1.65;text-align:right;white-space:nowrap;margin-top:16px"></div><button id="openFamilyProfile" class="btn" type="button" style="margin-top:7px;padding:6px 9px;font-size:11px">가족정보 설정</button></div></div></div></header>
 <div class="wrap"><main>
 <div class="panel" style="margin-top:0"><b>🌤️ 오늘의 날씨 · 고양</b><div id="homeWeather" class="row" style="justify-content:space-between;margin-top:8px"><span>날씨 정보를 불러오는 중이에요.</span></div><div id="weatherOutfit" class="muted" style="font-size:11px;margin-top:3px"></div></div>
 <div class="panel" style="margin-top:0"><b>👕 이번 주 등원복</b><div id="homeClothes" style="margin-top:8px;font-size:13px"></div></div>
-<div class="panel" style="margin-top:10px"><b>💗 우리가족 할 일</b><div id="homeTaskList" style="margin-top:8px"></div></div>
+<div class="panel" style="margin-top:10px"><b>💗 우리가족 할 일</b><div id="homeDailyRoutine"></div><div id="homeTaskList" style="margin-top:8px"></div></div>
 <div class="panel" style="margin-top:10px"><b>🎂 다가오는 기념일</b><div id="homeAnniversaries" style="margin-top:7px"></div></div>
 
 <div class="panel meal-summary" style="margin-top:10px"><h2>🍚 우리가족 식단표 <span id="homeMealDate" class="muted" style="font-size:13px"></span></h2><div id="homeMeals"></div></div>
@@ -125,7 +142,8 @@ body,.muted,.sub,.category-btn small,.lesson p,.room-item div{font-family:"Nanum
 
 <section id="clothes" class="panel hidden"><h2>👕 등원복 기록</h2><p class="muted">일요일마다 새 주 기록을 시작해요. 지난주 기록은 캘린더에서 날짜를 눌러 확인할 수 있어요.</p><div class="week" id="week"></div><div class="row" style="margin-top:12px"><select id="clothDay" class="field"><option value="월">월요일</option><option value="화">화요일</option><option value="수">수요일</option><option value="목">목요일</option><option value="금">금요일</option></select><input id="clothText" class="field" placeholder="예: 원복 / 사복 / 체육복"></div><button class="btn yellowbtn" style="margin-top:8px" id="saveCloth">등원복 저장</button><div id="clothesWeekLabel" class="muted" style="margin-top:10px"></div></section>
 <section id="tasks" class="panel hidden"><h2>🧸 우리가족 할 일 💗</h2>
-<div class="meal-card"><b>새 할 일 등록</b><div class="row" style="margin-top:8px"><input id="taskInput" class="field" placeholder="예: 아이 책 읽기"><input id="taskDate" type="date" class="field" style="max-width:145px"></div><button class="btn pinkbtn" id="addTask" style="margin-top:8px">할 일 등록</button></div>
+<div id="dailyRoutinePanel"></div><div id="stickerWall" class="sticker-wall"><div class="sticker-wall-title">🌈 우리 가족 스티커 모음</div><div id="stickerGrid" class="sticker-grid"></div></div>
+<div class="meal-card" style="margin-top:14px"><b>새 할 일 등록</b><div class="row" style="margin-top:8px"><input id="taskInput" class="field" placeholder="예: 아이 책 읽기"><input id="taskDate" type="date" class="field" style="max-width:145px"></div><button class="btn pinkbtn" id="addTask" style="margin-top:8px">할 일 등록</button></div>
 <p class="muted">지난 기록도 이곳에서 계속 확인할 수 있어요.</p><div id="taskList" style="margin-top:10px"></div></section>
 <section id="shopping" class="panel hidden"><h2>🛒 장보기 목록 🍓</h2><div class="row"><input id="shopInput" class="field" placeholder="예: 우유, 기저귀, 애호박"><button class="btn yellowbtn" id="addShop">추가</button></div><div id="shopList" style="margin-top:10px"></div></section>
 <section id="meals" class="panel hidden"><h2>🍽️ 가족 식단 입력</h2><p class="muted">엄마·아빠와 첫째는 아침·점심·저녁, 둘째는 1끼·2끼로 입력해요.</p><label class="muted">식단 날짜</label><input id="mealDate" type="date" class="field" style="margin:6px 0 10px"><div id="mealEditor"></div><div class="meal-card"><div class="row" style="justify-content:space-between;align-items:center"><b>🗓️ 이전 식단 기록</b><button class="btn" id="toggleMealHistory" type="button">기록 보기</button></div><div id="mealHistoryList" class="hidden" style="margin-top:8px"></div></div><div class="meal-card"><b>🥦 둘째 새 식재료 기록</b><div class="row" style="margin-top:8px"><input id="newIngredient" class="field" placeholder="새로 먹여본 식재료"><button class="btn" id="addIngredient">추가</button></div><div id="ingredientList" class="muted" style="margin-top:8px"></div></div><button class="btn yellowbtn" id="saveMeals" style="margin-top:12px">식단 저장하기</button></section>
@@ -236,6 +254,44 @@ function renderSpecial(){let a=read('special',[]);$('specialList').innerHTML=a.m
 function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function migrateLegacyTaskCompletion(){let a=read('tasks',[]),changed=false;a.forEach(x=>{if(x.done&&!x.completedAt){x.completedAt=x.date||dayKey();changed=true}});if(changed)save('tasks',a)}
 function taskIsVisibleOnHome(x){return !x.done||x.completedAt===dayKey()}
+const DAILY_ROUTINE_ITEMS=[
+ {id:'toy',label:'🧸 장난감 정리',days:[0,1,2,3,4,5,6]},
+ {id:'brush',label:'🪥 양치하기',days:[0,1,2,3,4,5,6]},
+ {id:'shot',label:'💉 주사 맞기',days:[0,1,2,3,4,5]}
+];
+const DAILY_STICKERS=['🌟','🦄','🐻','🐰','🦋','🌈','🍀','🐣','💖','🍓','🌼','🐼','🎀','🐱','🍒','☀️'];
+function routineForDate(date=dayKey()){
+ const all=read('dailyRoutine',{});
+ if(!all[date]){const dow=new Date(date+'T12:00:00').getDay();all[date]={};DAILY_ROUTINE_ITEMS.forEach(item=>{if(item.days.includes(dow))all[date][item.id]=false});save('dailyRoutine',all)}
+ return all[date];
+}
+function requiredRoutineItems(date=dayKey()){
+ const dow=new Date(date+'T12:00:00').getDay();
+ return DAILY_ROUTINE_ITEMS.filter(item=>item.days.includes(dow));
+}
+function maybeAwardDailySticker(date=dayKey()){
+ const state=routineForDate(date),required=requiredRoutineItems(date);
+ if(!required.length||!required.every(item=>state[item.id]===true))return;
+ const earned=read('stickerCollection',[]);
+ if(earned.some(item=>item.date===date))return;
+ const sticker=DAILY_STICKERS[earned.length%DAILY_STICKERS.length];
+ earned.push({date,sticker});save('stickerCollection',earned);
+ speak('오늘 미션 완료! 스티커를 모았어요');
+}
+function renderStickerWall(){
+ const earned=read('stickerCollection',[]).slice().sort((a,b)=>a.date.localeCompare(b.date));
+ const grid=$('stickerGrid');if(!grid)return;
+ grid.innerHTML=earned.length?earned.map(item=>`<div class="sticker-item"><span class="sticker-emoji">${item.sticker||'🌟'}</span><span class="sticker-date">${item.date.slice(5).replace('-','/')}</span></div>`).join(''):'<div class="sticker-empty" style="grid-column:1/-1">오늘의 할 일을 모두 완료하면 첫 스티커를 받을 수 있어요! ✨</div>';
+ const title=document.querySelector('.sticker-wall-title');if(title)title.textContent=`🌈 우리 가족 스티커 모음 · ${earned.length}개`;
+}
+function renderDailyRoutine(){
+ const date=dayKey(),state=routineForDate(date),required=requiredRoutineItems(date),done=required.filter(item=>state[item.id]===true).length;
+ const html=`<div class="daily-routine"><div class="daily-routine-title"><span>☀️ 오늘의 데일리 미션</span><span class="routine-progress">${done}/${required.length} 완료</span></div><div class="daily-routine-list">${required.map(item=>`<label class="daily-routine-row ${state[item.id]?'done':''}"><input type="checkbox" data-routine="${item.id}" ${state[item.id]?'checked':''}><span>${item.label}</span></label>`).join('')}</div>${done===required.length?'<div style="font-size:12px;color:#8a719f;margin-top:9px;font-weight:700">🎉 오늘 미션 완료! 스티커를 모았어요.</div>':''}</div>`;
+ const home=$('homeDailyRoutine'),page=$('dailyRoutinePanel');if(home)home.innerHTML=html;if(page)page.innerHTML=html;
+ document.querySelectorAll('[data-routine]').forEach(input=>input.onchange=()=>{
+  const all=read('dailyRoutine',{}),current=all[date]||{};current[input.dataset.routine]=input.checked;all[date]=current;save('dailyRoutine',all);maybeAwardDailySticker(date);renderDailyRoutine();renderStickerWall();
+ });
+}
 function renderHomeTasks(){let a=read('tasks',[]).filter(taskIsVisibleOnHome);$('homeTaskList').innerHTML=a.length?a.map(x=>{let i=read('tasks',[]).indexOf(x);return `<label class="item ${x.done?'done':''}" style="display:flex;align-items:center;gap:9px"><input type="checkbox" data-hometask="${i}" ${x.done?'checked':''}><span style="flex:1;text-decoration:${x.done?'line-through':'none'}">${escapeHtml(x.text)}</span></label>`}).join(''):'<div class="muted">등록된 할 일이 없어요.</div>';document.querySelectorAll('[data-hometask]').forEach(b=>b.onchange=()=>{let a=read('tasks',[]),x=a[+b.dataset.hometask];x.done=b.checked;if(b.checked)x.completedAt=dayKey();else delete x.completedAt;save('tasks',a);renderHomeTasks();renderTasks()})}
 function renderTasks(){let a=read('tasks',[]);$('taskList').innerHTML=a.length?a.map((x,i)=>`<div class="item ${x.done?'done':''}"><input type="checkbox" data-task="${i}" ${x.done?'checked':''}><span style="flex:1;text-decoration:${x.done?'line-through':'none'}">${escapeHtml(x.text)} <small class="muted">${x.date||'날짜 미지정'}${x.completedAt?' · 완료 '+x.completedAt:''}</small></span><button class="btn" data-taskdel="${i}">삭제</button></div>`).join(''):'<div class="muted">아직 등록된 할 일이 없어요.</div>';document.querySelectorAll('[data-task]').forEach(b=>b.onchange=()=>{let a=read('tasks',[]),x=a[+b.dataset.task];x.done=b.checked;if(b.checked)x.completedAt=dayKey();else delete x.completedAt;save('tasks',a);renderTasks();renderHomeTasks()});document.querySelectorAll('[data-taskdel]').forEach(b=>b.onclick=()=>{let a=read('tasks',[]);a.splice(+b.dataset.taskdel,1);save('tasks',a);renderTasks();renderHomeTasks()})}
 $('addTask').onclick=()=>{let t=$('taskInput').value.trim();if(!t)return;let a=read('tasks',[]);a.push({text:t,done:false,date:$('taskDate').value||dayKey()});save('tasks',a);$('taskInput').value='';renderTasks();renderHomeTasks()};
@@ -883,7 +939,7 @@ async function renderHomeWeather(){
  }catch(e){box.innerHTML='<span class="muted">날씨를 불러오지 못했어요.</span><button class="btn" id="retryWeather">다시 불러오기</button>';const b=$('retryWeather');if(b)b.onclick=renderHomeWeather;}
 }
 renderCategories();renderMonthPage();showDateDetailsPage(dayKey());renderHomeMeals();renderHomeAnniversaries();renderHomeWeather();renderVillage();if($('mealDate'))$('mealDate').value=dayKey();show('home');
-renderWeek();renderWeeklyProverb();migrateLegacyTaskCompletion();renderTasks();renderHomeTasks();renderShop();
+renderWeek();renderWeeklyProverb();migrateLegacyTaskCompletion();renderDailyRoutine();renderStickerWall();renderTasks();renderHomeTasks();renderShop();
 $('speakProverb').onclick=()=>{let p=$('weeklyProverbStudy').innerText;speak(p)};
 
 
